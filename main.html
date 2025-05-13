@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Special Message for Ewana Maisarah</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <div class="background-animation"></div>
+    <div class="hearts" id="hearts"></div>
+    
+    <div class="container">
+        <!-- Welcome Screen -->
+        <div class="welcome-screen" id="welcome">
+            <div>
+                <h1>Hi Sayangku Ewana Maisarah</h1>
+                <button id="continueButton" class="continue-btn">Continue to Next Page</button>
+            </div>
+        </div>
+
+        <!-- Question Screen -->
+        <div class="question-screen" id="question">
+            <h1>Are you Ewana Maisarah?</h1>
+            <div class="btn-container">
+                <button class="btn btn-yes" id="btnYes">
+                    Yes
+                    <div class="hearts-container">
+                        <span class="mini-heart">❤️</span>
+                        <span class="mini-heart">❤️</span>
+                        <span class="mini-heart">❤️</span>
+                    </div>
+                </button>
+                <button class="btn btn-no" id="btnNo">No</button>
+            </div>
+        </div>
+
+        <!-- Message Screen -->
+        <div class="message-screen" id="message">
+            <h1>For My Dearest Ewana</h1>
+            
+            <div class="gallery">
+                <div class="photo-frame">
+                    <img src="nana1.jpg" alt="Ewana" />
+                </div>
+                <div class="photo-frame">
+                    <img src="nana2.jpg" alt="Ewana" />
+                </div>
+                <div class="photo-frame">
+                    <img src="nana3.jpg" alt="Ewana" />
+                </div>
+                <div class="photo-frame">
+                    <img src="nana5.jpg" alt="Ewana" />
+                </div>
+            </div>
+            
+            <div class="floating-hearts">
+                <div class="floating-heart">❤️</div>
+                <div class="floating-heart">❤️</div>
+                <div class="floating-heart">❤️</div>
+                <div class="floating-heart">❤️</div>
+                <div class="floating-heart">❤️</div>
+            </div>
+            
+            <div class="letter-container">
+                <div class="letter">
+                    <h2>My Dearest Ewana Maisarah,</h2>
+                    <p>Every moment spent with you is a treasure I hold close to my heart. Your smile brightens even the darkest of days, and your laughter is the sweetest melody to my ears.</p>
+                    <p>I created this little page just for you, to show you how special you are to me. You bring so much joy and meaning to my life.</p>
+                    <p>Thank you for being you – beautiful inside and out, kind, caring, and simply amazing in every way.</p>
+                    <p>With all my love and affection,</p>
+                    <p><strong>❤️ ~Anas ❤️</strong></p>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                Scroll for more ↓
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Make the continue button work immediately
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set up the continue button on the welcome screen
+            document.getElementById('continueButton').addEventListener('click', function() {
+                document.getElementById('welcome').style.display = 'none';
+                document.getElementById('question').style.display = 'flex';
+            });
+            
+            // Button event listeners
+            document.getElementById('btnYes').addEventListener('click', () => {
+                document.getElementById('question').style.display = 'none';
+                document.getElementById('message').style.display = 'block';
+                document.getElementById('hearts').style.display = 'block';
+                createHearts();
+                animateLetterParagraphs();
+            });
+
+            document.getElementById('btnNo').addEventListener('click', () => {
+                alert('Session ending... Goodbye!');
+                window.close(); // This may not work in all browsers due to security restrictions
+                // Alternative approach
+                document.body.innerHTML = '<div style="display:flex;justify-content:center;align-items:center;height:100vh;"><h1>Session ended. Please close this tab.</h1></div>';
+            });
+        });
+
+        // Create falling hearts animation
+        function createHearts() {
+            const container = document.getElementById('hearts');
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+                
+                container.appendChild(heart);
+                
+                setTimeout(() => {
+                    heart.remove();
+                }, 5000);
+            }, 300);
+        }
+
+        // Animate letter paragraphs
+        function animateLetterParagraphs() {
+            const paragraphs = document.querySelectorAll('.letter p');
+            paragraphs.forEach((p, index) => {
+                setTimeout(() => {
+                    p.style.opacity = 1;
+                }, 500 + (index * 200));
+            });
+        }
+        
+        // Hide scroll indicator when scrolled
+        const letterContainer = document.querySelector('.letter-container');
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+        
+        if (letterContainer && scrollIndicator) {
+            letterContainer.addEventListener('scroll', () => {
+                if (letterContainer.scrollTop > 30) {
+                    scrollIndicator.style.opacity = '0.5';
+                } else {
+                    scrollIndicator.style.opacity = '1';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
